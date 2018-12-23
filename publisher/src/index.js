@@ -1,38 +1,41 @@
 const moment = require('moment');
 const TopicConnector = require('@redice44/rabbitmq-topic-routing-schema');
 const topics = require('./topics');
-const isRandomTopic = !!process.env.RANDOM_TOPIC;
-
 const messageQuantity = isNaN(parseInt(process.env.SIZE)) ? 10 : parseInt(process.env.SIZE);
-const connectionString = {
-  user: process.env.RABBITMQ_USER,
-  pass: process.env.RABBITMQ_PASS,
-  url: process.env.RABBITMQ_URL
-};
-const { name, schema } = topics[process.env.PUB_TOPIC];
-const subTopics = {
-  town: 'victor',
-  benefactor: 'SN',
-  priority: 'low'
-};
+
 const main = async () => {
-  const connection = new TopicConnector(connectionString, name, schema);
-  try {
-    await connection.connectWithRetry();
-    await connection.createTopic();
-    for (let i = 0; i < messageQuantity; i++) {
-      const msg = `Msg: ${i}`;
-      await connection.publishToTopic(
-        isRandomTopic ? randomTopic(schema) : subTopics,
-        msg,
-        { timestamp: +moment() }
-      );
-    }
-    await connection.close();
-  } catch (error) {
-    throw error;
+  const connectionString = {
+    user: process.env.RABBITMQ_USER,
+    pass: process.env.RABBITMQ_PASS,
+    url: process.env.RABBITMQ_URL
+  };
+  const { name, schema } = process.env.TOPIC && topics[process.env.TOPIC]
+    ? topics[process.env.TOPIC]
+    : topics[process.env.PUB_TOPIC];
+  const connection = await setupConnection(connectionString, { name, schema });
+  for (let i = 0; i < messageQuantity; i++) {
+    const msg = {
+      amount: 10,
+      exchangeTarget: 'town_msg',
+      start: +moment()
+    };
+    await connection.publishToTopic(
+      randomTopic(schema),
+      JSON.stringify(msg),
+      { timestamp: +moment() }
+    );
+    console.log(`Exchange: ${name} | ${i}`);
   }
+  await connection.close();
 };
+
+const setupConnection = async (connectionString, { name, schema }) => {
+  const connection = new TopicConnector(connectionString, name, schema);
+  await connection.connectWithRetry();
+  await connection.createTopic();
+  return connection;
+};
+
 const randomNum = n => Math.floor(Math.random() * n);
 
 const randomTopic = schema => {
