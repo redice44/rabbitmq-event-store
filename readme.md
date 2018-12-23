@@ -1,6 +1,11 @@
-Currently just a testing bed for [rabbitmq-topic-routing-schema](https://github.com/redice44/rabbitmq-topic-routing-schema.git) (best name ever!).
+# Event Store Test Lab
 
-1. Run RabbitMQ: `./go start rabbitmq`
-2. Run Subscriber: `./go start sub`
-3. Publish things! `./go start pub`
-4. Hack away
+## Commands
+
+Run RabbitMQ: `./go start rabbitmq`
+
+Run Event Store `./go start event-store`
+
+Run Subscriber `./go start sub`
+
+Publish random things `./go start pub [n]`
