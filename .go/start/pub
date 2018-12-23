@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+. ".go/.globals"
+
+echo -e "${COLOR_CYAN}Starting Publisher${COLOR_NORMAL}"
+${DC} up -d ${PUB_IMAGE}

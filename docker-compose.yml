@@ -1,0 +1,45 @@
+version: "3.3"
+
+services:
+  rabbit:
+    image: "rabbitmq:3.7.8-management-alpine"
+    hostname: "rabbit"
+    environment:
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
+  publisher:
+    build:
+      context: ./publisher
+      dockerfile: ./docker/Dockerfile
+    environment:
+      RABBITMQ_USER: "rabbitmq"
+      RABBITMQ_PASS: "rabbitmq"
+      RABBITMQ_URL: "rabbit:5672"
+      PUB_TOPIC: "townMessages"
+    volumes:
+      - ./publisher:/usr/src/app
+      - publisher-node_modules:/usr/src/app/node_modules
+  subscriber:
+    build:
+      context: ./subscriber
+      dockerfile: ./docker/Dockerfile
+    environment:
+      RABBITMQ_USER: "rabbitmq"
+      RABBITMQ_PASS: "rabbitmq"
+      RABBITMQ_URL: "rabbit:5672"
+      SUB_TOPIC: "townMessages"
+    volumes:
+      - ./subscriber:/usr/src/app
+      - subscriber-node_modules:/usr/src/app/node_modules
+
+volumes:
+  rabbitmq-data:
+  subscriber-node_modules:
+  publisher-node_modules:

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+. ".go/.globals"
+
+echo -e "${COLOR_CYAN}Starting RabbitMQ${COLOR_NORMAL}"
+${DC} up -d ${RABBIT_IMAGE}
+${DC} logs -f ${RABBIT_IMAGE}
