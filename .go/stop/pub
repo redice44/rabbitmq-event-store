@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+. ".go/.globals"
+
+echo -e "${COLOR_CYAN}Stopping Subscriber${COLOR_NORMAL}"
+${DC} stop ${PUB_IMAGE}

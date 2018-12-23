@@ -4,4 +4,4 @@ set -e
 
 echo -e "${COLOR_CYAN}Starting Subscriber${COLOR_NORMAL}"
 ${DC} up -d ${SUB_IMAGE}
-${DC} logs -f ${SUB_IMAGE}
+${DC} logs -f --tail="100" ${SUB_IMAGE}

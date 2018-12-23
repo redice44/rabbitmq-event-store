@@ -4,4 +4,4 @@ set -e
 
 echo -e "${COLOR_CYAN}Starting RabbitMQ${COLOR_NORMAL}"
 ${DC} up -d ${RABBIT_IMAGE}
-${DC} logs -f ${RABBIT_IMAGE}
+${DC} logs -f --tail="100" ${RABBIT_IMAGE}

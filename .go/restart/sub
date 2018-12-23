@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+. ".go/.globals"
+
+echo -e "${COLOR_CYAN}Restarting Subscriber${COLOR_NORMAL}"
+${DC} restart ${SUB_IMAGE}
+${DC} logs -f --tail="100" ${SUB_IMAGE}
