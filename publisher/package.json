@@ -11,6 +11,7 @@
   "author": "Matt Thomson<mthomson.lee@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "@redice44/rabbitmq-topic-routing-schema": "https://github.com/redice44/rabbitmq-topic-routing-schema.git"
+    "@redice44/rabbitmq-topic-routing-schema": "https://github.com/redice44/rabbitmq-topic-routing-schema.git",
+    "moment": "^2.23.0"
   }
 }

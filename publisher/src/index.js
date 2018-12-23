@@ -1,3 +1,4 @@
+const moment = require('moment');
 const TopicConnector = require('@redice44/rabbitmq-topic-routing-schema');
 const topics = require('./topics');
 const isRandomTopic = !!process.env.RANDOM_TOPIC;
@@ -21,7 +22,11 @@ const main = async () => {
     await connection.createTopic();
     for (let i = 0; i < messageQuantity; i++) {
       const msg = `Msg: ${i}`;
-      await connection.publishToTopic(isRandomTopic ? randomTopic(schema) : subTopics, msg);
+      await connection.publishToTopic(
+        isRandomTopic ? randomTopic(schema) : subTopics,
+        msg,
+        { timestamp: +moment() }
+      );
     }
     await connection.close();
   } catch (error) {
