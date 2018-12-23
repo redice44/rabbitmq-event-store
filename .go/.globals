@@ -9,6 +9,7 @@ RABBIT_IMAGE=rabbit
 PUB_IMAGE=publisher
 SUB_IMAGE=subscriber
 EVENT_STORE_IMAGE=event-store
+REPLAY_IMAGE=replay
 
 # Pretty
 COLOR_BLACK="\033[30m"

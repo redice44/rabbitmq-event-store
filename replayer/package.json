@@ -1,0 +1,17 @@
+{
+  "name": "@redice44/rabbitmq-replayer",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Matt Thomson<mthomson.lee@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "@redice44/rabbitmq-topic-routing-schema": "https://github.com/redice44/rabbitmq-topic-routing-schema.git",
+    "moment": "^2.23.0"
+  }
+}
