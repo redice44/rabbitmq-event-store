@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "migrate:latest": "knex migrate:latest",
     "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +12,9 @@
   "author": "Matt Thomson<mthomson.lee@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "@redice44/rabbitmq-topic-routing-schema": "https://github.com/redice44/rabbitmq-topic-routing-schema.git"
+    "@redice44/rabbitmq-topic-routing-schema": "https://github.com/redice44/rabbitmq-topic-routing-schema.git",
+    "knex": "^0.16.3",
+    "objection": "^1.4.0",
+    "pg": "^7.7.1"
   }
 }

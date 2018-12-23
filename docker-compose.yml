@@ -37,9 +37,28 @@ services:
       RABBITMQ_PASS: "rabbitmq"
       RABBITMQ_URL: "rabbit:5672"
       SUB_TOPIC: "townMessages"
+      DB_USER: "postgres"
+      DB_PASS: "pass"
+      DB_HOST: "pg"
+      DB_NAME: "event_store"
+    depends_on:
+      - pg
     volumes:
       - ./event-store:/usr/src/app
       - event-store-node_modules:/usr/src/app/node_modules
+
+  pg:
+    image: postgres:10.6
+    restart: always
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      - "./event-store/db/pg-startup:/docker-entrypoint-initdb.d"
+    environment:
+      POSTGRES_DB: "event_store"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "pass"
+    ports:
+      - 5432
 
   subscriber:
     build:
@@ -55,6 +74,7 @@ services:
       - subscriber-node_modules:/usr/src/app/node_modules
 
 volumes:
+  pg-data:
   rabbitmq-data:
   event-store-node_modules:
   subscriber-node_modules:

@@ -2,7 +2,7 @@
 set -e
 . ".go/.globals"
 
-echo -e "${COLOR_CYAN}Starting Event Store ${COLOR_NORMAL}"
-${DC} up -d ${EVENT_STORE_IMAGE}
+echo -e "${COLOR_CYAN}Restarting Event Store${COLOR_NORMAL}"
+${DC} restart ${EVENT_STORE_IMAGE}
 ${DC} run --rm ${EVENT_STORE_IMAGE} npm run migrate:latest
 ${DC} logs -f --tail="100" ${EVENT_STORE_IMAGE}
