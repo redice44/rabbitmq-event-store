@@ -27,6 +27,20 @@ services:
     volumes:
       - ./publisher:/usr/src/app
       - publisher-node_modules:/usr/src/app/node_modules
+
+  event-store:
+    build:
+      context: ./event-store
+      dockerfile: ./docker/Dockerfile
+    environment:
+      RABBITMQ_USER: "rabbitmq"
+      RABBITMQ_PASS: "rabbitmq"
+      RABBITMQ_URL: "rabbit:5672"
+      SUB_TOPIC: "townMessages"
+    volumes:
+      - ./event-store:/usr/src/app
+      - event-store-node_modules:/usr/src/app/node_modules
+
   subscriber:
     build:
       context: ./subscriber
@@ -42,5 +56,6 @@ services:
 
 volumes:
   rabbitmq-data:
+  event-store-node_modules:
   subscriber-node_modules:
   publisher-node_modules:

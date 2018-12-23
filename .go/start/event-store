@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+. ".go/.globals"
+
+echo -e "${COLOR_CYAN}Starting Event Store ${COLOR_NORMAL}"
+${DC} run --rm ${EVENT_STORE_IMAGE}

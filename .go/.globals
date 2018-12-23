@@ -8,6 +8,7 @@ DC=docker-compose
 RABBIT_IMAGE=rabbit
 PUB_IMAGE=publisher
 SUB_IMAGE=subscriber
+EVENT_STORE_IMAGE=event-store
 
 # Pretty
 COLOR_BLACK="\033[30m"
