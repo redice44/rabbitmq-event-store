@@ -23,6 +23,7 @@ services:
       RABBITMQ_PASS: "rabbitmq"
       RABBITMQ_URL: "rabbit:5672"
       PUB_TOPIC: "townMessages"
+      RANDOM_TOPIC: "anything"
     volumes:
       - ./publisher:/usr/src/app
       - publisher-node_modules:/usr/src/app/node_modules
