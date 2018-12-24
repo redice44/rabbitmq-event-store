@@ -1,3 +1,4 @@
 module.exports = {
-  townMessages: require('./townMessages')
+  replay: require('./replay'),
+  town_msg: require('./townMessages')
 };

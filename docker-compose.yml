@@ -22,7 +22,7 @@ services:
       RABBITMQ_USER: "rabbitmq"
       RABBITMQ_PASS: "rabbitmq"
       RABBITMQ_URL: "rabbit:5672"
-      PUB_TOPIC: "townMessages"
+      PUB_TOPIC: "town_msg"
     volumes:
       - ./publisher:/usr/src/app
       - publisher-node_modules:/usr/src/app/node_modules
@@ -47,7 +47,7 @@ services:
       RABBITMQ_USER: "rabbitmq"
       RABBITMQ_PASS: "rabbitmq"
       RABBITMQ_URL: "rabbit:5672"
-      SUB_TOPIC: "townMessages"
+      SUB_TOPIC: "town_msg"
       DB_USER: "postgres"
       DB_PASS: "pass"
       DB_HOST: "pg"
@@ -79,7 +79,7 @@ services:
       RABBITMQ_USER: "rabbitmq"
       RABBITMQ_PASS: "rabbitmq"
       RABBITMQ_URL: "rabbit:5672"
-      SUB_TOPIC: "townMessages"
+      SUB_TOPIC: "town_msg"
     volumes:
       - ./subscriber:/usr/src/app
       - subscriber-node_modules:/usr/src/app/node_modules

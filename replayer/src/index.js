@@ -15,7 +15,8 @@ const main = async () => {
   const msg = {
     amount: replayAmount,
     exchangeTarget: replayExchange,
-    start: +moment()
+    replayExchange: `replay_${replayExchange}`,
+    start: process.env.TIMESTAMP ? process.env.TIMESTAMP : +moment()
   };
   await connection.publishToTopic(
     { time: 'last' },

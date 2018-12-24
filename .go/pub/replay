@@ -3,4 +3,4 @@ set -e
 . ".go/.globals"
 
 echo -e "${COLOR_CYAN}Replaying $1 ${COLOR_NORMAL}"
-${DC} run --rm -e REPLAY_TOPIC=$1 -e REPLAY_AMOUNT=$2 ${REPLAY_IMAGE}
+${DC} run --rm -e REPLAY_TOPIC=$1 -e REPLAY_AMOUNT=$2 -e TIMESTAMP=$3 ${REPLAY_IMAGE}

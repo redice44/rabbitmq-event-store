@@ -33,9 +33,22 @@ const main = async () => {
       .orderBy('timestamp', 'desc')
       .limit(content.amount)
       .returning('*');
-    console.log('events', events);
+    // console.log('events', events);
+
+    const { schema } = topics[content.exchangeTarget];
+    const replayEventsConnection = await setupConnection(connectionString, { name: content.replayExchange, schema });
+    for (let i = 0; i < events.length; i++) {
+      // hack away. extend in package later. 
+      await replayEventsConnection.publish(
+        content.replayExchange,
+        events[i].routing_key,
+        events[i].simple_message,
+        { timestamp: +events[i].timestamp }
+      );
+    }
+    await replayEventsConnection.close();
   };
-   const processReplayBetweenMessage = async message => {
+  const processReplayBetweenMessage = async message => {
     console.log('Replay Between Message');
     console.log(`Routing Key: ${message.fields.routingKey}`);
     console.log(message.content.toString());
